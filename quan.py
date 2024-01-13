@@ -1,7 +1,3 @@
-# Why this code looks wierd?
-# This codebase follows the functional programming paradigm,
-# which means that there shall be no mutability and everything is a function
-
 ###########
 #     Imports     #
 ###########
@@ -63,6 +59,8 @@ def run() -> None:
     platform: str = checkPlatform(handleArgv(sys.argv)[1])
 
     tokens: list = lex(fcontent)
+    print(tokens)
+
     return result
 
 if __name__ == "__main__":

@@ -4,7 +4,7 @@
     Also the type of result is the type of the function
 *//
 
-fn entry()
+fn entry(1)
 {
     imute result: Integer = 0;
     return; // This doesn't change much since every function auto returns at end
