@@ -18,7 +18,7 @@ Be **Bold**!
 Each statement ends with a semicollon!
 
 ```c
-print("Quan is beuatiful");
+print("Quan is beuatiful"); // this is an example statement, it must be in a function
 ```
 
 There are two types of variable declarations.  
