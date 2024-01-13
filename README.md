@@ -4,7 +4,8 @@
 # Languages Premise
 
 Quan is designed to be a simple functional language.  
-(Functional programming paradigm is not forced, however is highly recomended)
+That teaches people the basics of the functional programming paradigm.  
+And is also general purpuse, however was put in mind for linux/windows CLI/GUI programs.
 
 q stands for: Quick  
 u stands for: understandable  
@@ -72,7 +73,7 @@ namespace _entry
     {
         // custom type: Integer with possible values of 0 and 1
         imute result: Integer(0, 1) = input; // do `imute result: Integer(1-10) = 1` for a type ranged 1 to 10 including both sides
-        // or`imute result: Integer(1-10 & 15-20) = 1` for a type ranged 1 to 10 and 15-20 including both sides
+        // or`imute result: Integer(1-10, 15-20) = 1` for a type ranged 1 to 10 and 15-20 including both sides
         // @self = this function
         if result: @self (result); // if result == 1 calls itself with result, forever recursion. multiline if would be if (condition) {...}// 
     }

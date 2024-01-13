@@ -3,7 +3,7 @@
     the result variable is required, else there is an error
     Also the type of result is the type of the function
 *//
-
+)
 fn entry()
 {
     imute result: Integer = 0;
