@@ -1,2 +1,88 @@
 # Quan
- A compiled systems language
+ A general purpuse functional compiled language
+
+# Languages Premise
+
+Quan is designed to be a simple functional language.  
+(Functional programming paradigm is not forced, however is highly recomended)
+
+# Quan Preview
+
+Be **Bold**!  
+Each statement ends with a semicollon!
+
+```c
+print("Quan is beuatiful");
+```
+
+There are two types of variable declarations.  
+Mutable variable declaration:
+```c
+// This is a mutable variable, it's value can change
+mute a: Integer = 10;
+
+// Mutation is unsafe, to prevent unwanted changes for a functions local mutable,
+// you can specify the number of times it can mutate
+
+fn entry()
+{
+    mute(2) result: Integer = 4; // this mutable can mutate only 2 times per function cycle
+    result++;                             // this is just result += 1   [First mutation]
+    result *= 2;                         // [Second mutation]
+    // result += result / 2         // [Third mutation], Would be an error!
+}
+```
+Or Imutable variables, which no matter how much you please & beg won't mutate:
+```c
+fn five()
+{
+    imute result: Integer = 5;
+}
+
+fn entry()
+{
+    // The variable checker prioritizes local variables
+    // Since five didn't exits in this scope before, it would pick the global one (our function)
+    imute five: Integer = @global five();
+    imute result: Integer = 0;
+    print(five -> String);      // print supports only strings
+}
+```
+
+**Note:** the variable `result` decides of output and return type of the function.  
+
+Loops are a relic of the past!  
+In Quan there are no loops!  
+We use recursion instead.  
+**Note:** You can recurse forever  
+**Another Note:** Organize functions with `namespaces`
+
+```c
+// For redability purpuses make sure to name your namespaces after functions they "belong" to,
+// so for entry it will be _entry
+
+namespace _entry
+{
+    fn truthMachine(imute input: Integer(0, 1))
+    {
+        // custom type: Integer from 0 to 1, including borders (0 and 1)
+        imute result: Integer(0, 1) = input;
+
+        // @self = this function
+        if result: @self (result); // if result == 1 calls itself with result, forever recursion. multiline if would be if (condition) {...}// 
+    }
+
+    fn handleInput()
+    {
+        imute result: String(1) = getStringInput("0 / 1 >>> "); // String cut to be 1 char long
+        if ! ["0", "1"].has(result): handleInput(); // Recurse until a valid input
+    }
+}
+
+fn entry()
+{
+    imute result: Integer = 0;
+    imute input: Integer(0, 1) = _entry.handleInput() -> Integer;
+    _entry.truthMachine(input);
+}
+```

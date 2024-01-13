@@ -1,0 +1,13 @@
+imute print: Module = @import("stdlib::print");
+imute exit: Module = @import("stdlib::exit");
+
+fn entry()
+{
+    imute result: Integer = 0
+
+    print("Hello, World!" + "\n");
+    exit(0);
+
+    print("I shall not happen!" + "\n");
+    return;                                                 // Just for aestethic reasons
+}
