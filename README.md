@@ -6,6 +6,11 @@
 Quan is designed to be a simple functional language.  
 (Functional programming paradigm is not forced, however is highly recomended)
 
+q stands for: Quick  
+u stands for: understandable  
+a stands for: to assembly  
+n stands for: novice friendly  
+
 # Quan Preview
 
 Be **Bold**!  
@@ -56,7 +61,7 @@ In Quan there are no loops!
 We use recursion instead.  
 **Note:** You can recurse forever  
 **Another Note:** Organize functions with `namespaces`
-
+**Yet Another Note:** Mutables an Imutables of a functions are fred after each function cycle
 ```c
 // For redability purpuses make sure to name your namespaces after functions they "belong" to,
 // so for entry it will be _entry
@@ -65,9 +70,9 @@ namespace _entry
 {
     fn truthMachine(imute input: Integer(0, 1))
     {
-        // custom type: Integer from 0 to 1, including borders (0 and 1)
-        imute result: Integer(0, 1) = input;
-
+        // custom type: Integer with possible values of 0 and 1
+        imute result: Integer(0, 1) = input; // do `imute result: Integer(1-10) = 1` for a type ranged 1 to 10 including both sides
+        // or`imute result: Integer(1-10 & 15-20) = 1` for a type ranged 1 to 10 and 15-20 including both sides
         // @self = this function
         if result: @self (result); // if result == 1 calls itself with result, forever recursion. multiline if would be if (condition) {...}// 
     }
