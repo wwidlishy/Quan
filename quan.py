@@ -9,6 +9,8 @@
 import sys
 import os
 
+from lexer import lex
+
 ########
 #     Run     #
 ########
