@@ -96,3 +96,19 @@ fn entry()
     _entry.truthMachine(input);
 }
 ```
+
+Okay, listen to me.  
+When it comes to if statements there are 2 syntaxes you can mix: one and multiline if  
+The keywords are: `if`, `elsif`, `else`.  
+
+```c
+fn entry()
+{
+    mute(1) result: Integer(0-2) = -1;
+    if 2 + 2 == 5: result = 1;
+    elsif (16.root(2) == 4) {
+        result = 0;
+    }
+    else: result = 2;
+}
+```
