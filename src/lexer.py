@@ -2,52 +2,75 @@ from colorama import Fore, Back, Style
 from src.error import error
 import sys
 
-class _global:
-    tokens = []
-    mode = []
-    current = {}
+class Lexer:
+    def __init__(self) -> None:
+        self.tokens = []
+        self.current = ""
+        self.mode = ""
 
-    line = 1
-    pos = 0
-    char = ""
+        self.pos = 0
+        self.line = 1
+    def lex(self, src: str) -> list:
+        self.src = src
 
-def lexerMakeNumber(number: str) -> int:
-    try: result = int(number)
-    except: error(\
-f"""{Fore.RED}[Error: Invalid Integer Literal!]{Style.RESET_ALL}    {Back.RED}[COMPILATION TERMINATED: -1]{Style.RESET_ALL}
-'{number}' is not a valid Integer literal.""", sys.exit)
-        
-    return result
+        for self.index in range(len(self.src)):
+            self.char = self.src[self.index]
+            self.pos += 1
 
-def lexerMainLoop(src: str, index: int) -> int: # tokens, mode, current, pos, line, val1
-    if len(src) - index != 1:
-        CURRENT_INDEX = index + 1
-        _global.char = src[CURRENT_INDEX]
+            if self.char == "\n":
+                self.pos = 0
+                self.line += 1
+                continue
 
-        _global.pos += 1
-        _global.line += (1 if _global.char == "\n" else 0)
+            if self.mode == "":
+                self.num_logic("WhenFirst")
+                self.op_logic("WhenFirst")
 
-        if _global.mode == []:
-            if _global.char in "1234567890":
-                _global.mode.append("Integer")
-                _global.current["Integer"] = f"{_global.char}"
-                return lexerMainLoop(src, CURRENT_INDEX)
-        elif "Integer" in _global.mode:
-            if _global.char in "1234567890":
-                _global.current["Integer"] += f"{_global.char}"
-                return lexerMainLoop(src, CURRENT_INDEX)
-            else:
-                number = lexerMakeNumber(_global.current["Integer"])
-                if "Tuple" not in _global.mode: _global.tokens.append(["Integer", number])
-                else: _global.current["Tuple"].append(["Integer", number])
+            if self.mode == "Operator":
+                self.op_logic("WhenMode")
+                continue
+            if self.mode == "Integer":
+                self.num_logic("WhenMode")
+                continue
 
-                _global.current["Integer"] = ""
-                return lexerMainLoop(src, CURRENT_INDEX)
-        return lexerMainLoop(src, CURRENT_INDEX)
+        return self.tokens
     
-    return _global.tokens
+    def num_logic(self, where):
+        DIGITS = "1234567890"
 
+        if where == "WhenFirst":
+            if self.char in DIGITS:
+                self.mode = "Integer"
+        if where == "WhenMode":
+            if self.char in DIGITS:
+                self.current += self.char
+            if self.char not in DIGITS or len(self.src) == self.index + 1:
+                number = int(self.current)
+
+                self.tokens.append(["Integer", number])
+                self.current = ""
+                self.mode = ""
+    
+    def op_logic(self, where):
+        CHARS = "+-/*=<>:|&!."
+        # : Type Assigment, := is a type of
+        OPS = ["+", "++", "+=", "-", "--", "-=", "/", "//", "/=", "*", "**", "*=", "=", "==", "!=", ">=", "<=", ">", "<", ":", ":=", "|", "&", "!", "."]
+        if where == "WhenFirst":
+            if self.char in CHARS:
+                self.mode = "Operator"
+        if where == "WhenMode":
+            if self.char in CHARS:
+                self.current += self.char
+            if self.char not in CHARS or len(self.src) == self.index + 1:
+                operator = self.current if self.current in OPS else error(\
+f"""{Fore.RED}Line: {self.line}, Position: {self.pos-len(self.current)} :: [Error: Invalid Operator!]{Style.RESET_ALL}    {Back.RED}[COMPILATION TERMINATED: -1]{Style.RESET_ALL}
+'{self.current}' is an Invalid Operator.""", sys.exit)
+
+                self.tokens.append(["Operator", operator])
+                self.current = ""
+                self.mode = ""
 def lex(src: str) -> list:
-    return lexerMainLoop(src, -1)
+    lexer = Lexer()
+    tokens = lexer.lex(src)
 
-# Todo!: keywords, id's, brackets, curly brackets, tuples, operators
+    return tokens

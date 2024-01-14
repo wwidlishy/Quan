@@ -11,9 +11,6 @@ from colorama import just_fix_windows_console
 from src.lexer import lex
 from src.error import error
 
-from src.linux_builder import build_linux
-from src.windows_builder import build_windows
-
 ########
 #     Run     #
 ########
@@ -30,12 +27,16 @@ Proper usage: quan [input.quan] [platform => (linux, windows)]""", sys.exit)
     return result
 
 def checkPlatform(platform):
-    if platform in ["linux", "windows"]:
-        result = platform
-    else:
+    try:
+        result = __import__(f"builders.{platform}")
+    except:
+        nl = "\n"
         error(\
-f"""{Fore.RED}[Error: Invalid usage!]{Style.RESET_ALL}    {Back.RED}[COMPILATION TERMINATED: -1]{Style.RESET_ALL}
-Proper usage: quan [input.quan] [platform => (linux, windows)]""", sys.exit)
+f"""{Fore.RED}[Error: Builder Not Found!]{Style.RESET_ALL}    {Back.RED}[COMPILATION TERMINATED: -1]{Style.RESET_ALL}
+'{platform}' is an Invalid Builder.
+
+--- Valid Builders ---
+{nl.join([i[::-1][3:][::-1] for i in os.listdir("builders/")])}""", sys.exit)
 
     return result
 
@@ -59,7 +60,7 @@ def run() -> None:
     platform: str = checkPlatform(handleArgv(sys.argv)[1])
 
     tokens: list = lex(fcontent)
-    print(tokens)
+    [print(token) for token in tokens]
 
     return result
 
