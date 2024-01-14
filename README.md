@@ -60,9 +60,11 @@ fn entry()
 Loops are a relic of the past!  
 In Quan there are no loops!  
 We use recursion instead.  
+
 **Note:** You can recurse forever  
-**Another Note:** Organize functions with `namespaces`
-**Yet Another Note:** Mutables an Imutables of a functions are fred after each function cycle
+**Another Note:** Organize functions with `namespaces`  
+**Yet Another Note:** Mutables and Imutables of a functions are fred after each function cycle
+
 ```c
 // For redability purpuses make sure to name your namespaces after functions they "belong" to,
 // so for entry it will be _entry
@@ -75,7 +77,9 @@ namespace _entry
         imute result: Integer(0, 1) = input; // do `imute result: Integer(1-10) = 1` for a type ranged 1 to 10 including both sides
         // or`imute result: Integer(1-10, 15-20) = 1` for a type ranged 1 to 10 and 15-20 including both sides
         // @self = this function
-        if result: @self (result); // if result == 1 calls itself with result, forever recursion. multiline if would be if (condition) {...}// 
+        // if you do `truthMachine(result)` it will return an error bcz it is not defined yet
+        if result: @self (result); // if result == 1 calls itself with result, forever recursion. 
+        //multiline if would be if (condition) {...}// 
     }
 
     fn handleInput()
@@ -88,7 +92,7 @@ namespace _entry
 fn entry()
 {
     imute result: Integer = 0;
-    imute input: Integer(0, 1) = _entry.handleInput() -> Integer;
+    imute input: Integer(0, 1) = _entry.handleInput() -> Integer(0, 1);
     _entry.truthMachine(input);
 }
 ```

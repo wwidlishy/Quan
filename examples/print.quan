@@ -1,6 +1,3 @@
-imute print: Module = @import("stdlib::print");
-imute exit: Module = @import("stdlib::exit");
-
 fn entry()
 {
     imute result: Integer = 0
