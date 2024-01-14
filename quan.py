@@ -10,6 +10,7 @@ from colorama import just_fix_windows_console
 
 from src.lexer import lex
 from src.error import error
+from src._ast import ast
 
 ########
 #     Run     #
@@ -60,7 +61,8 @@ def run() -> None:
     platform: str = checkPlatform(handleArgv(sys.argv)[1])
 
     tokens: list = lex(fcontent)
-    [print(token) for token in tokens]
+    print(tokens)
+    _ast: list   = ast(tokens)
 
     return result
 

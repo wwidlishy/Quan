@@ -1,5 +1,0 @@
-fn entry()
-{
-    imute result: Integer(0, 1);
-    result = 0;
-}
