@@ -141,11 +141,10 @@ f"""{Fore.RED}Line: {self.line}, Position: {self.pos-len(self.current)} :: [Erro
 '{self.current}' is an Invalid Operator.""", sys.exit)
 
                 if self.current == "//":
-                    print('comment')
                     self.comment = true
                 else:
                     self.tokens.append(["Operator", operator])
-                    
+
                 self.current = ""
                 self.mode = ""
                 self.index -= 1

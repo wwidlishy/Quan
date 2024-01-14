@@ -60,10 +60,12 @@ def run() -> None:
     fcontent: str = getFile(handleArgv(sys.argv)[0])
     platform: str = checkPlatform(handleArgv(sys.argv)[1])
 
+    if fcontent.strip() == "": return
+
     tokens: list = lex(fcontent)
-    print(tokens)
     _ast: list   = ast(tokens)
 
+    [print(i) for i in _ast]
     return result
 
 if __name__ == "__main__":
