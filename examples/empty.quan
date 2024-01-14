@@ -1,11 +1,9 @@
-//*
-    Note: `return`, returns the result variable
-    the result variable is required, else there is an error
-    Also the type of result is the type of the function
-*//
+//    Note: `return`, returns the result variable
+//    the result variable is required, else there is an error
+//    Also the type of result is the type of the function
 
-fn entry(1)
+fn entry()
 {
     imute result: Integer = 0;
     return; // This doesn't change much since every function auto returns at end
-}
+};

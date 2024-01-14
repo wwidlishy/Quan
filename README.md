@@ -36,14 +36,14 @@ fn entry()
     result++;                             // this is just result += 1   [First mutation]
     result *= 2;                         // [Second mutation]
     // result += result / 2         // [Third mutation], Would be an error!
-}
+};
 ```
 Or Imutable variables, which no matter how much you please & beg won't mutate:
 ```c
 fn five()
 {
     imute result: Integer = 5;
-}
+};
 
 fn entry()
 {
@@ -52,7 +52,7 @@ fn entry()
     imute five: Integer = @global five();
     imute result: Integer = 0;
     print(five -> String);      // print supports only strings
-}
+};
 ```
 
 **Note:** the variable `result` decides of output and return type of the function.  
@@ -80,21 +80,21 @@ namespace _entry
         // if you do `truthMachine(result)` it will return an error bcz it is not defined yet
         if result: @self (result); // if result == 1 calls itself with result, forever recursion. 
         //multiline if would be if (condition) {...}// 
-    }
+    };
 
     fn handleInput()
     {
         imute result: String(1) = getStringInput("0 / 1 >>> "); // String cut to be 1 char long
         if ! ["0", "1"].has(result): handleInput(); // Recurse until a valid input
-    }
-}
+    };
+};
 
 fn entry()
 {
     imute result: Integer = 0;
     imute input: Integer(0, 1) = _entry.handleInput() -> Integer(0, 1);
     _entry.truthMachine(input);
-}
+};
 ```
 
 Okay, listen to me.  
@@ -110,5 +110,5 @@ fn entry()
         result = 0;
     }
     else: result = 2;
-}
+};
 ```

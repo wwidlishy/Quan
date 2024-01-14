@@ -2,4 +2,4 @@ fn entry()
 {
     imute result: Integer = 0;
     print("Hello, World!" + "\n");           
-}
+};
