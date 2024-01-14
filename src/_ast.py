@@ -14,6 +14,8 @@ class StatementOrganize:
             if tok == "EOS":
                 result.append(current)
                 current = []
+            elif isinstance(tok, list) and tok[0] == "Block":
+                current.append([tok[0], StatementOrganize().splitlines(tok[1])])
             else:
                 current.append(tok)
 
@@ -111,5 +113,6 @@ Enclosure count missmatch: please check if all parentheses / lists / blocks are 
                     continue
         return result
 def ast(tokens: list) -> list:
-    result: list = StatementOrganize().encapsulate(tokens)
+    SO = StatementOrganize()
+    result: list = SO.splitlines(SO.encapsulate(tokens))
     return result

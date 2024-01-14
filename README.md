@@ -112,3 +112,21 @@ fn entry()
     else: result = 2;
 };
 ```
+
+As in many other languages, arrays are encapsolated in `[]`.  
+Here is a simple list usage
+
+```c
+fn sum_arr(imute a: Array, imute current_sum: Number = 0, imute index: Integer = 0)
+{
+    mute(1) result: Number = current_sum;
+    imute nextIndex: Integer = index + 1;
+
+    if index.isValidIndexOf(a): result = @self (a, current_sum + a[index], nextIndex);
+    else: result = current_sum;
+};
+
+fn entry()
+{
+    imute result: Integer = sum_arr([-3, 3]); // An array can hold multiple types
+};```

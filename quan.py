@@ -52,6 +52,17 @@ Proper usage: quan [input.quan] [platform => (linux, windows)]""", sys.exit)
         
     return result
 
+def printAst(ast: list) -> None:
+    for line in ast:
+        for token in line:
+            if isinstance(token, list):
+                print(token[0])
+                for element in token[1]:
+                    print(f"\t{element}")
+            else:
+                print(token)
+        print()
+
 def run() -> None:
     result: None = None
     just_fix_windows_console()
@@ -65,7 +76,7 @@ def run() -> None:
     tokens: list = lex(fcontent)
     _ast: list   = ast(tokens)
 
-    [print(i) for i in _ast]
+    printAst(_ast)
     return result
 
 if __name__ == "__main__":
