@@ -5,7 +5,8 @@
 
 Quan is designed to be a simple functional language.  
 That teaches people the basics of the functional programming paradigm.  
-And is also general purpuse, however was put in mind for linux/windows CLI/GUI programs.
+And is also general purpuse, however was put in mind for linux/windows CLI/GUI programs.  
+It is ment to be the Python of Functional Languages.
 
 q stands for: Quick  
 u stands for: understandable  
@@ -142,5 +143,32 @@ fn entry()
     result = inc(result);           // Increment using inc function
     result = result.inc();          // In Quan x.f(...) = f(x, ...)
     // (a, b, c).f(...) = f(a, b, c, ...)
+};
+```
+
+In python there is a **kwargs system,  
+N of an argument.  
+In Quan it is used like this:  
+
+```c
+// `args` as an argument is reserved for kwargs, must be Array type
+// You can have only one `args`, and arguments can be before and after `args`
+
+fn sum(imute args: Array, imute sum: Number = 0)
+{
+    mute(1) result: Number = sum;
+    imute nextIndex: Integer = 1;
+
+    // Note: # in `#args[1:args.lastIndex()]` means to extract the list,
+    // so: f([a, b]) = f([a, b]); f(#[a, b]) = f(a, b)
+
+    if nextIndex.isValidIndexOf(args): result += args[0] + @self (#args[1:args.lastIndex()]);
+    else: result += args[0];
+};
+
+fn entry()
+{
+    imute result: Integer = sum(-3, 3, -4, 4);
+    print(result -> String);
 };
 ```
