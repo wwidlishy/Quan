@@ -130,3 +130,17 @@ fn entry()
 {
     imute result: Integer = sum_arr([-3, 3]); // An array can hold multiple types
 };```
+
+Also there are lambdas.  
+
+```c
+imute inc: Fn = lambda(imute x: Integer): Integer x + 1;
+
+fn entry()
+{
+    mute(2) result: Integer = -2;
+    result = inc(result);           // Increment using inc function
+    result = result.inc();          // In Quan x.f(...) = f(x, ...)
+    // (a, b, c).f(...) = f(a, b, c, ...)
+};
+```

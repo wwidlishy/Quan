@@ -1,0 +1,4 @@
+fn entry()
+{
+    imute result: Integer = 0; // An array can hold multiple types
+};

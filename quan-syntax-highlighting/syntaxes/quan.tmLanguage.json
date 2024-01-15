@@ -1,0 +1,44 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "Quan",
+	"patterns": [
+		{
+			"include": "#keywords"
+		},
+		{
+			"include": "#strings"
+		},
+		{
+			"include": "#comments"
+		},
+		{
+			"name": "variable.quan",
+			"match": "\\b[a-zA-Z_]\\w*\\b"
+		}
+	],
+	"repository": {
+		"keywords": {
+			"patterns": [{
+				"name": "keyword.control.quan",
+				"match": "\\b(if|elsif|else|return|mute|imute|Integer|String|Array|fn)\\b"
+			}]
+		},
+		"strings": {
+			"name": "string.quoted.double.quan",
+			"begin": "\"",
+			"end": "\"",
+			"patterns": [
+				{
+					"name": "constant.character.escape.quan",
+					"match": "\\\\."
+				}
+			]
+		},
+		"comments": {
+			"name":"comment.line",
+			"begin": "//",
+			"end": "\n"
+		}
+	},
+	"scopeName": "source.quan"
+}

@@ -1,0 +1,25 @@
+{
+  "name": "quan-syntax-highlighting",
+  "displayName": "Quan Syntax Highlighting",
+  "description": "Syntax highlighting for the quan programming language",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [{
+      "id": "quan",
+      "aliases": ["Quan", "quan"],
+      "extensions": [".quan",".qn"],
+      "configuration": "./language-configuration.json"
+    }],
+    "grammars": [{
+      "language": "quan",
+      "scopeName": "source.quan",
+      "path": "./syntaxes/quan.tmLanguage.json"
+    }]
+  }
+}

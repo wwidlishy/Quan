@@ -52,15 +52,17 @@ Proper usage: quan [input.quan] [platform => (linux, windows)]""", sys.exit)
         
     return result
 
-def printAst(ast: list) -> None:
+def printAst(ast: list, indent="") -> None:
     for line in ast:
         for token in line:
             if isinstance(token, list):
-                print(token[0])
-                for element in token[1]:
-                    print(f"\t{element}")
+                print(f"{indent}{token[0]}")
+                if isinstance(token[1], list):
+                    printAst(token[1], f"{indent}\t")
+                else:
+                    print(f"{indent}\t{token[1]}")
             else:
-                print(token)
+                print(f"{indent}{token}")
         print()
 
 def run() -> None:
